@@ -2,8 +2,12 @@ import cv2
 import os
 
 ### directory names for origin and destination
-origin_dir     = '/colored_planes'
-destin_dir     = '/gray_scale_planes'
+origin_dir     = '/c_positives'
+destin_dir     = '/g_positives'
+
+### create properly-named directory
+if not os.path.exists(destin_dir):
+    os.makedirs(destin_dir)
 
 ### turn directory names into absolute paths
 origin_dir_abs = os.path.abspath('.' + origin_dir)
