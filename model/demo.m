@@ -10,6 +10,9 @@ dimensions       = [input_layer_size, ... % put all dimensions into
                     num_hidden1, ...      % vector for easier param
                     num_hidden2, ...      % handling
                     num_labels];
+num_iter         = 1000; % number of learning iterations
+learning_rate    = 0.01; % a.k.a. alpha
+lambda           = 0.03; % regularization coeficient
 
 % Load and vizualise dataset
 fprintf('Loading and Visualizing Data ...\n')
@@ -29,4 +32,13 @@ pause;
 % Initialize weight matrices values between 0 and 1
 params = initializeDeep(dimensions);
 
-%
+% for i=1:num_iter
+  cache = {};
+  % Run forward propagation
+  [cache, AL] = forwardProp(X, params);
+
+  % Run backward propagation
+
+  % Update parameters
+
+% end
