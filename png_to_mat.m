@@ -21,6 +21,7 @@ for k = 1:length(pngFiles)
   if max(imageVector) == 1 % convert B&W to Grayscale
     imageVector = imageVector*255;
   end
+  imageVector = double(imageVector); % cast imageVector as double
   X = [X; imageVector];
 end
 
