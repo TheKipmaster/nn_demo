@@ -27,4 +27,4 @@ end
 % make labels vector
 Y = ones((size(X)(1)), 1);
 % save matrix to .mat file along with labels
-save('dataset.mat', 'X', 'Y');
+save('model/dataset.mat', 'X', 'Y');
