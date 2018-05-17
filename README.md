@@ -6,12 +6,12 @@
 
 2. Run python script
 ```
-python2 convert_to_grayscale.py
+$ python2 convert_to_grayscale.py
 ```
 
 3. Convert grayscale images into .mat filename
 ```
-octave png_to_mat.m
+$ octave png_to_mat.m
 ```
 
 #### Acknowledgements
