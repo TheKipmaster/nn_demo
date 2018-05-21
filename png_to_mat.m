@@ -26,6 +26,6 @@ for k = 1:length(pngFiles)
 end
 
 % make labels vector
-Y = ones((size(X)(1)), 1);
+Y = zeros((size(X)(1)), 1);
 % save matrix to .mat file along with labels
-save('model/y_train_dataset.mat', 'X', 'Y');
+save('model/negative_dataset.mat', 'X', 'Y');

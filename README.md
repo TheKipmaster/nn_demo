@@ -1,17 +1,11 @@
 ## Simple Neural Network Classifier
 
-### Setup
+### Requirements
 
-1. Unzip images. Make sure resulting folder is named "c_positives"
+- python's 'openCV' library, for the script that converts the dataset images to grayscale
 
-2. Run python script
 ```
-$ python2 convert_to_grayscale.py
-```
-
-3. Convert grayscale images into .mat filename
-```
-$ octave png_to_mat.m
+$ sudo pip install opencv-python
 ```
 
 #### Acknowledgements

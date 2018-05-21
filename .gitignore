@@ -1,3 +1,6 @@
 /*positives
+/*negatives
 octave-workspace
-*.mat
+*.zip
+convert_to_grayscale.py
+png_to_mat.m
