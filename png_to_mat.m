@@ -1,5 +1,5 @@
 % define useful variables
-myFolder = '/home/kipman/Documents/NEXT/Demo/positives';
+myFolder = './g_negatives';
 filePattern = fullfile(myFolder, '*.png');
 pngFiles = dir(filePattern);
 X = [];
@@ -28,4 +28,4 @@ end
 % make labels vector
 Y = ones((size(X)(1)), 1);
 % save matrix to .mat file along with labels
-save('model/dataset.mat', 'X', 'Y');
+save('model/y_train_dataset.mat', 'X', 'Y');

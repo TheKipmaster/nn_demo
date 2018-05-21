@@ -2,8 +2,8 @@ import cv2
 import os
 
 ### directory names for origin and destination
-origin_dir     = '/c_positives'
-destin_dir     = '/g_positives'
+origin_dir     = '/c_negatives'
+destin_dir     = '/g_negatives'
 
 ### create properly-named directory
 if not os.path.exists(destin_dir):
@@ -22,4 +22,4 @@ var = zip(img_paths_abs, filenames) # zip file names and paths for easy mapping
 # convert all images to gray_scale format
 for (img_path_abs, filename) in var:
     gray_scale = cv2.imread(img_path_abs, 0)
-    cv2.imwrite(destin_dir_abs + '/' + filename, gray_scale)
+    cv2.imwrite(destin_dir_abs + '/' + filename + '.png', gray_scale)
