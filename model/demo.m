@@ -11,10 +11,9 @@ dimensions       = [input_layer_size, ... %
                     num_hidden1, ...      % put all dimensions into vector for easier paramhandling
                     num_hidden2, ...      %
                     num_labels];          %
-num_iter         = 100;                   % number of learning iterations
-learning_rate    = 0.3;                  %
+num_iter         = 500;                   % number of learning iterations
+learning_rate    = 0.05;                  %
 lambda           = 0;                     % regularization coeficient
-params = initializeDeep(dimensions);      % Initialize weight matrices with values between 0 and 1
 grads = {};                               %
 costs = [];                               % to keep track of the cost
 
@@ -42,5 +41,16 @@ displayData(X(sel, :));
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
-% Training loop
-[params, costs] = training(params, num_iter, X_train, Y_train, learning_rate, lambda);
+train_accuracy = [];
+valid_accuracy = [];
+for i=1:10
+  % Training loop
+  params = initializeDeep(dimensions);      % Initialize weight matrices with values between 0 and 1
+  [params, costs] = training(params, num_iter, X_train, Y_train, learning_rate, lambda);
+  training_prediction = predict(X_train, params);
+  validation_prediction = predict(X_valid, params);
+
+  train_accuracy = [train_accuracy; accuracy(training_prediction, Y_train)];
+  valid_accuracy = [valid_accuracy; accuracy(validation_prediction, Y_valid)];
+end
+[train_accuracy, valid_accuracy]
