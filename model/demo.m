@@ -28,6 +28,14 @@ m = size(X, 1);
 sel = randperm(size(X, 1));
 sel = sel(1:100);
 
+X_train = X(1:306, :);
+X_test = X(307:409, :);
+X_valid = X(410:511, :);
+
+Y_train = Y(1:306, :);
+Y_test = Y(307:409, :);
+Y_valid = Y(410:511, :);
+
 displayData(X(sel, :));
 
 fprintf('Program paused. Press enter to continue.\n');
