@@ -5,9 +5,9 @@ function [dA_prev, dw, db] = backwardActivation(dA, cache, non_liearity)
 
   % dz = dA.*arrayfun(@(z)(deriv(non_liearity, z)), z);
   if strcmp(non_liearity, 'sigmoid')
-    dz = sigmoidPrime(z);
+    dz = dA.*sigmoidPrime(z);
   elseif strcmp(non_liearity, 'relu')
-    dz = reluPrime(z);
+    dz = dA.*reluPrime(z);
   end
 
   dw = (dz'*A_prev)/m;
