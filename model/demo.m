@@ -43,24 +43,4 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 % Training loop
-for i=1:num_iter
-
-  % Run forward propagation
-  [cache, AL] = forwardProp(X, params);
-
-  % compute cost
-  cost = computeCost(AL, Y, lambda);
-
-  % Run backward propagation
-  grads = backwardProp(cache, AL, Y);
-
-  % Update parameters
-  params = updateParams(params, grads, learning_rate);
-
-  % Print the cost every 100 training example
-  if mod(i, 100) == 0
-    fprintf('Cost after iteration %d: %f\n', i, cost);
-  end
-  costs = [costs ; cost];
-
-end
+[params, costs] = training(params, num_iter, X_train, Y_train, learning_rate, lambda);
