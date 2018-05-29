@@ -6,11 +6,11 @@ function [cache AL] = forwardProp(X, params)
   A = X;
   L = length(params);
 
-  for l=2:(L)
+  for l=1:(L-1)
     A_prev = A;
-    wl = params{l-1}{1};
-    bl = params{l-1}{2};
-    [cache{l-1}, A] = forwardActivation(wl, bl, A_prev, 'relu');
+    wl = params{l}{1};
+    bl = params{l}{2};
+    [cache{l}, A] = forwardActivation(wl, bl, A_prev, 'relu');
   end
   wL = params{L}{1};
   bL = params{L}{2};
