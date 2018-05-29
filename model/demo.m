@@ -12,7 +12,7 @@ dimensions       = [input_layer_size, ... %
                     num_hidden2, ...      %
                     num_labels];          %
 num_iter         = 100;                   % number of learning iterations
-learning_rate    = 0.001;                 %
+learning_rate    = 0.3;                  %
 lambda           = 0;                     % regularization coeficient
 params = initializeDeep(dimensions);      % Initialize weight matrices with values between 0 and 1
 grads = {};                               %
@@ -22,6 +22,7 @@ costs = [];                               % to keep track of the cost
 fprintf('Loading and Visualizing Data ...\n')
 
 load('dataset.mat');
+X = (X-128)/255;
 m = size(X, 1);
 
 % Randomly select 100 data points to display
@@ -46,12 +47,12 @@ for i=1:num_iter
   grads = backwardProp(cache, AL, Y);
 
   % Update parameters
-  params = updateParams(params, grads, alpha);
+  params = updateParams(params, grads, learning_rate);
 
   % Print the cost every 100 training example
-  % if mod(i, 100) == 0
+  if mod(i, 100) == 0
     fprintf('Cost after iteration %d: %f\n', i, cost);
-    costs = [costs ; cost];
-  % end
+  end
+  costs = [costs ; cost];
 
 end
