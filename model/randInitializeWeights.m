@@ -20,8 +20,8 @@ W = zeros(L_out, L_in);
 %
 
 % Randomly initialize the weights to small values
-epsilon_init = 0.12;
-W = rand(L_out, L_in) * 2 * epsilon_init - epsilon_init;
+
+W = randn(L_out, L_in) * sqrt(2/L_in);
 
 % =========================================================================
 
