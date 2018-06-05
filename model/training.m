@@ -20,9 +20,9 @@ function [params, costs] = training(params, num_iter, X_train, Y_train, learning
         params = updateParams(params, grads, learning_rate);
 
         % Print the cost every 100 training example
-        if mod(i, 100) == 0
-            fprintf('Cost after iteration %d: %f\n', i, cost);
-        end
+        %if mod(i, 100) == 0
+        %    fprintf('Cost after iteration %d: %f\n', i, cost);
+        %end
         costs = [costs ; cost];
     end
 end
