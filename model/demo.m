@@ -1,19 +1,20 @@
 % reset variable space, close all open visualization windows, Clear screen
 clear; close all; clc;
-pkg load optim % load package for computing derivatives
 
 % Setup hyperparameters and variables of Neural Network
 input_layer_size = 576;                   % 24x24 input images
-num_hidden1      = 100;                   % size of first hidden layer
-num_hidden2      = 25;                    % size of second hidden layer
+num_hidden1      = 288;                   % size of first hidden layer
+% num_hidden2      = 25;                 % size of second hidden layer
+% num_hidden3      = 3;                   % size of third hidden layer
 num_labels       = 1;                     % size of output layer
 dimensions       = [input_layer_size, ... %
-                    num_hidden1, ...      % put all dimensions into vector for easier paramhandling
-                    num_hidden2, ...      %
+                    num_hidden1, ...      % put all dimensions into vector for easier param handling
+                    % num_hidden2, ...    %
+                    % num_hidden3, ...    %
                     num_labels];          %
 num_iter         = 500;                   % number of learning iterations
 learning_rate    = 0.05;                  %
-lambda           = 0;                     % regularization coeficient
+lambda           = 25;                     % regularization coeficient
 grads = {};                               %
 costs = [];                               % to keep track of the cost
 
@@ -21,19 +22,17 @@ costs = [];                               % to keep track of the cost
 fprintf('Loading and Visualizing Data ...\n')
 
 load('dataset.mat');
-X = (X-128)/255;
+X = (X-128)/255; % normalize inputs
 m = size(X, 1);
 
 % Randomly select 100 data points to display
 sel = randperm(size(X, 1));
 sel = sel(1:100);
 
-X_train = X(1:306, :);
-X_test = X(307:409, :);
+X_train = X(1:409, :);
 X_valid = X(410:511, :);
 
-Y_train = Y(1:306, :);
-Y_test = Y(307:409, :);
+Y_train = Y(1:409, :);
 Y_valid = Y(410:511, :);
 
 displayData(X(sel, :));
@@ -53,4 +52,4 @@ for i=1:10
   train_accuracy = [train_accuracy; accuracy(training_prediction, Y_train)];
   valid_accuracy = [valid_accuracy; accuracy(validation_prediction, Y_valid)];
 end
-[train_accuracy, valid_accuracy]
+[train_accuracy, valid_accuracy; sum(train_accuracy)/10, sum(valid_accuracy)/10]
