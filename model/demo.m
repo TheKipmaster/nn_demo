@@ -15,7 +15,7 @@ dimensions       = [input_layer_size, ... %
 num_iter         = 500;                   % number of learning iterations
 learning_rate    = 0.05;                  %
 lambda           = 25;                    % regularization coeficient
-rounds           = 1;                     % number of training rounds over which to compute average precision
+rounds           = 10;                     % number of training rounds over which to compute average precision
 
 % Load and vizualise dataset
 fprintf('Loading and Visualizing Data ...\n')
@@ -33,11 +33,11 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 % Divide dataset into training and validation subsets
-X_train = X(1:409, :);
-Y_train = Y(1:409, :);
+X_train = X(1:704, :);
+Y_train = Y(1:704, :);
 
-X_valid = X(410:511, :);
-Y_valid = Y(410:511, :);
+X_valid = X(704:end, :);
+Y_valid = Y(704:end, :);
 
 train_accuracy = [];
 valid_accuracy = [];
