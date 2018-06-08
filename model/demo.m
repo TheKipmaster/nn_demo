@@ -12,10 +12,10 @@ dimensions       = [input_layer_size, ... %
                     % num_hidden2, ...    %
                     % num_hidden3, ...    %
                     num_labels];          %
-num_iter         = 500;                   % number of learning iterations
-learning_rate    = 0.05;                  %
+num_iter         = 100;                   % number of learning iterations
+learning_rate    = 1;                  %
 lambda           = 25;                    % regularization coeficient
-rounds           = 10;                     % number of training rounds over which to compute average precision
+rounds           = 10;                    % number of training rounds over which to compute average precision
 
 % Load and vizualise dataset
 fprintf('Loading and Visualizing Data ...\n')
