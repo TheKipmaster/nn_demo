@@ -14,8 +14,10 @@ function [train_accuracy, valid_accuracy] = layers_contour(hidden_sizes1, hidden
   Y_train = Y(1:409, :);
   Y_valid = Y(410:511, :);
 
-  for i=1:length(hidden_sizes1)
-    for j=1:length(hidden_sizes2)
+  I = length(hidden_sizes1);
+  J = length(hidden_sizes2);
+  for i=1:I
+    for j=1:J
       t_accuracy = [];
       v_accuracy = [];
       for t=1:10
@@ -35,7 +37,8 @@ function [train_accuracy, valid_accuracy] = layers_contour(hidden_sizes1, hidden
       end
       train_accuracy(i,j) = sum(t_accuracy)/10;
       valid_accuracy(i,j) = sum(v_accuracy)/10;
-      fprintf('Training epoch #%d done.', i+(j-1)*length(hidden_sizes1));
+      fprintf('Training epoch #%d done. %d epochs left\n', j+(i-1)*I, I*J - (j+(i-1)*I));
+      fflush(stdout);
     end
   end
 
