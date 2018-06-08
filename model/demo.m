@@ -33,28 +33,39 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 % Divide dataset into training and validation subsets
-X_train = X(1:704, :);
-Y_train = Y(1:704, :);
+X_train = X(1:779, :);
+Y_train = Y(1:779, :);
 
-X_valid = X(704:end, :);
-Y_valid = Y(704:end, :);
+X_valid = X(780:end, :);
+Y_valid = Y(780:end, :);
 
-train_accuracy = [];
-valid_accuracy = [];
+t_accuracy = t_recall = t_precision = t_f1 = [];
+v_accuracy = v_recall = v_precision = v_f1 = [];
 % Training loop
 for i=1:rounds
   params = initializeDeep(dimensions);      % Initialize weight matrices with values between 0 and 1
-  [params, costs] = training(params, num_iter, X_train, Y_train, learning_rate, lambda);
+  [params, costs] = training(params, num_iter, X_train, Y_train, learning_rate, lambda); % Optimize weights
+
+  % Compute predictions based on optimized weights
   train_predictions = predict(X_train, params);
   valid_predictions = predict(X_valid, params);
 
-  train_accuracy = [train_accuracy; accuracy(train_predictions, Y_train)];
-  valid_accuracy = [valid_accuracy; accuracy(valid_predictions, Y_valid)];
+  % Save evaluation metrics
+  [t_accuracy(i), t_recall(i), t_precision(i), t_f1(i)] = evaluate_model(train_predictions, Y_train);
+  [v_accuracy(i), v_recall(i), v_precision(i), v_f1(i)] = evaluate_model(valid_predictions, Y_valid);
 end
-fprintf('    train  |  valid\n')
-display([train_accuracy, valid_accuracy]);
-fprintf('         means      \n')
-display([sum(train_accuracy)/rounds, sum(valid_accuracy)/rounds])
+
+% Display various evaluation measures computed during training cicles
+fprintf('averages over %d training rounds\n', rounds);
+fprintf('    train  |  valid\n');
+fprintf('        accuracy   \n');
+display([sum(t_accuracy)/rounds, sum(v_accuracy)/rounds]);
+fprintf('         recall    \n');
+display([sum(t_recall)/rounds, sum(v_recall)/rounds]);
+fprintf('       precision   \n');
+display([sum(t_precision)/rounds, sum(v_precision)/rounds]);
+fprintf('        F1 Score   \n');
+display([sum(t_f1)/rounds, sum(v_f1)/rounds]);
 
 %  Randomly permute examples
 m = size(X_valid, 1);
