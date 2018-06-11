@@ -2,20 +2,8 @@
 clear; close all; clc;
 
 % Setup hyperparameters and variables of Neural Network
-input_layer_size = 576;                   % 24x24 input images
-num_hidden1      = 288;                   % size of first hidden layer
-% num_hidden2      = 25;                 % size of second hidden layer
-% num_hidden3      = 3;                   % size of third hidden layer
-num_labels       = 1;                     % size of output layer
-dimensions       = [input_layer_size, ... %
-                    num_hidden1, ...      % put all dimensions into vector for easier param handling
-                    % num_hidden2, ...    %
-                    % num_hidden3, ...    %
-                    num_labels];          %
-num_iter         = 100;                   % number of learning iterations
-learning_rate    = 1;                  %
-lambda           = 25;                    % regularization coeficient
-rounds           = 10;                    % number of training rounds over which to compute average precision
+[dimensions, num_iter, learning_rate, lambda] = set_hyperparams();
+rounds = 10; % number of training rounds over which to compute average metrics
 
 % Load and vizualise dataset
 fprintf('Loading and Visualizing Data ...\n')
@@ -33,14 +21,13 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 % Divide dataset into training and validation subsets
-X_train = X(1:779, :);
-Y_train = Y(1:779, :);
+X_train = X(1:779, :); X_valid = X(780:end, :);
+Y_train = Y(1:779, :); Y_valid = Y(780:end, :);
 
-X_valid = X(780:end, :);
-Y_valid = Y(780:end, :);
-
+% Initialize arrays to store evaluation metrics of each training round
 t_accuracy = t_recall = t_precision = t_f1 = [];
 v_accuracy = v_recall = v_precision = v_f1 = [];
+
 % Training loop
 for i=1:rounds
   params = initializeDeep(dimensions);      % Initialize weight matrices with values between 0 and 1
