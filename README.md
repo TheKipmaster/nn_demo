@@ -8,5 +8,8 @@
 $ sudo pip install opencv-python
 ```
 
+### Demonstration
+Run demonstration.m script to train model and see results.
+
 #### Acknowledgements
 dataset images designed by Freepik from Flaticon
